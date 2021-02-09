@@ -1142,6 +1142,17 @@ function addPageBinding(bindingName) {
             'media': mediaType or '',
         })
 
+    async def emulateTimezone(self, timezoneId: str) -> None:
+        """Emulate Timezone
+        :arg str timezoneId: for example 'Asia/Makassar'
+        """
+        try:
+            await self._client.send('Emulation.setTimezoneOverride', {
+                'timezoneId': timezoneId or '',
+            })
+        except Exception as e:
+            raise ValueError(f'{e} {timezoneId}')
+
     async def setViewport(self, viewport: dict) -> None:
         """Set viewport.
 
